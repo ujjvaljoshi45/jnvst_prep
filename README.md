@@ -14,3 +14,52 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+{
+"Ahmedabad": [
+"Dasinfomedia Pvt. Ltd.",
+"CodeIN Square Technology",
+"Hexotix",
+"Aavitech Solutions",
+"Zobi",
+"Prudent Corporate",
+"Identixweb",
+"Globant",
+"Techno Infonet",
+"Saviant Consulting"
+],
+"Bangalore": [
+"Accenture",
+"Cognizant",
+"TCS (Tata Consultancy Services)",
+"Wipro",
+"Infosys",
+"Mphasis",
+"Zensar Technologies",
+"ThoughtWorks",
+"L&T Technology Services",
+"Capgemini"
+]
+}
+
+Ahmedabad
+Dasinfomedia Pvt. Ltd.
+CodeIN Square Technology
+Hexotix
+Aavitech Solutions
+Zobi
+Prudent Corporate
+Identixweb
+Globant (though typically requires some experience)
+Techno Infonet
+Saviant Consulting
+Bangalore
+Accenture
+Cognizant
+TCS (Tata Consultancy Services)
+Wipro
+Infosys
+Mphasis
+Zensar Technologies
+ThoughtWorks
+L&T Technology Services
+Capgemini
