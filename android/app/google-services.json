@@ -12,7 +12,12 @@
           "package_name": "com.example.test_preparation_app"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "607995566384-3pr4bvphl6a3i9l40vkpl35l3b06u4dp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyA8qbnc9LN4grHu-9ESgAlvOzW_5KmXljY"
@@ -20,7 +25,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "607995566384-3pr4bvphl6a3i9l40vkpl35l3b06u4dp.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "607995566384-0u53tfvptlv494l5lpjb7a2hm169k4c9.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.testPreparationApp"
+              }
+            }
+          ]
         }
       }
     },
@@ -31,7 +48,20 @@
           "package_name": "com.uht.jnvst"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "607995566384-6nhu9oicq2nfgp6illclhucr7hg395tc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.uht.jnvst",
+            "certificate_hash": "24a02fa147812bc177be624344cd43ee6420670a"
+          }
+        },
+        {
+          "client_id": "607995566384-3pr4bvphl6a3i9l40vkpl35l3b06u4dp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyA8qbnc9LN4grHu-9ESgAlvOzW_5KmXljY"
@@ -39,7 +69,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "607995566384-3pr4bvphl6a3i9l40vkpl35l3b06u4dp.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "607995566384-0u53tfvptlv494l5lpjb7a2hm169k4c9.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.testPreparationApp"
+              }
+            }
+          ]
         }
       }
     }
