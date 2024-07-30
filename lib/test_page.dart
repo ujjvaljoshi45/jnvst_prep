@@ -37,7 +37,7 @@ class _MathsPracticeTestState extends State<MathsPracticeTest> {
     return Scaffold(
       backgroundColor: const Color(0XFF374898),
       appBar: AppBar(
-        leading: Icon(Icons.arrow_back_ios_new_rounded),
+        leading: const Icon(Icons.arrow_back_ios_new_rounded),
         backgroundColor: const Color(0XFF374898),
       ),
       body: Padding(
@@ -48,15 +48,6 @@ class _MathsPracticeTestState extends State<MathsPracticeTest> {
             const Text('Maths Practice Test',
                 style: TextStyle(fontSize: 28.0, fontWeight: FontWeight.bold)),
             const SizedBox(height: 16.0),
-            // LinearProgressIndicator(
-            //   minHeight: 35,
-            //   borderRadius: BorderRadius.circular(12.0),
-            //   value: 0.3,
-            //   semanticsLabel: '3 Minute',
-            //   semanticsValue: '3 Minute',
-            //   backgroundColor: Color(0XFF2C3B7D),
-            //   valueColor: const AlwaysStoppedAnimation<Color>(Colors.teal),
-            // ),
             ClipRRect(
               borderRadius: BorderRadius.circular(12.0),
               child: Row(
@@ -162,19 +153,31 @@ class _MathsPracticeTestState extends State<MathsPracticeTest> {
           ],
         ),
       ),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: ElevatedButton(
-          onPressed: () {
-            // Next question logic
-          },
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.pink,
-            minimumSize: const Size(double.infinity, 50),
+      bottomNavigationBar: Container(
+        color: Colors.pink,
+        padding: const EdgeInsets.only(top: 10, bottom: 20),
+        child: const Text(
+          'Next Question',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 24,
           ),
-          child: const Text('Next Question'),
         ),
       ),
+      // bottomNavigationBar: Padding(
+      //   padding: const EdgeInsets.all(16.0),
+      //   child: ElevatedButton(
+      //     onPressed: () {
+      //       // Next question logic
+      //     },
+      //     style: ElevatedButton.styleFrom(
+      //       backgroundColor: Colors.pink,
+      //       minimumSize: const Size(double.infinity, 50),
+      //     ),
+      //     child: const Text('Next Question'),
+      //   ),
+      // ),
     );
   }
 }
