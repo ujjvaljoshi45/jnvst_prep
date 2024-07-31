@@ -8,6 +8,8 @@ import 'package:jnvst_prep/screens/home.dart';
 import 'package:jnvst_prep/utils/tools.dart';
 import 'package:provider/provider.dart';
 
+// hi
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
