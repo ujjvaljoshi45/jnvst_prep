@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jnvst_prep/screens/test_page.dart';
+import 'package:jnvst_prep/utils/tools.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -10,7 +11,10 @@ class HomePage extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        ElevatedButton(onPressed: () => Navigator.push(context,MaterialPageRoute(builder: (context) => const TestPage(),)), child: const Text('Take Test'))
+        ElevatedButton(onPressed: () async {
+          await getTDataProvider(context).initTest('Math Test');
+          Navigator.push(context,MaterialPageRoute(builder: (context) => const TestPage()));
+    }, child: const Text('Take Test'))
       ],
     );
   }

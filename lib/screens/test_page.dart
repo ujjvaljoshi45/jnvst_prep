@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jnvst_prep/models/question.dart';
 import 'package:jnvst_prep/providers/test_data_provider.dart';
+import 'package:jnvst_prep/utils/tools.dart';
 import 'package:provider/provider.dart';
 
 class TestPage extends StatefulWidget {
@@ -12,19 +13,6 @@ class TestPage extends StatefulWidget {
 
 class _TestPageState extends State<TestPage> {
   int _selectedOption = -1;
-  // Question question = Question(
-  //     id: 'id',
-  //     question:
-  //         'If x, y are two consecutive even numbers and y = 3602, then x =',
-  //     options: [
-  //       '3600',
-  //       '3604',
-  //       '3606',
-  //       '3600 or 3604',
-  //     ],
-  //     correctOption: 3,
-  //     subject: 'math');
-  double _timeElapsed = 0.1;
   @override
   Widget build(BuildContext context) {
     double myWidth = getWidth(context) - 32;
@@ -33,7 +21,7 @@ class _TestPageState extends State<TestPage> {
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios_new_rounded),
-          onPressed: () => getTdataProvider(context).previousQuestion(),
+          onPressed: () => getTDataProvider(context).previousQuestion(),
         ),
         backgroundColor: const Color(0XFF374898),
       ),
@@ -44,7 +32,7 @@ class _TestPageState extends State<TestPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Maths Practice Test',
+                Text(value.currentTestName,
                     style: TextStyle(
                         fontSize: 28.0,
                         fontWeight: FontWeight.bold,
@@ -71,7 +59,7 @@ class _TestPageState extends State<TestPage> {
                                 color: Colors.teal,
                               ),
                               height: 40,
-                              width: myWidth * _timeElapsed - 8,
+                              width: myWidth * value.percentageCompleted - 8,
                             ),
                           ],
                         ),
@@ -94,7 +82,7 @@ class _TestPageState extends State<TestPage> {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Text(
-                              'Question ${getTdataProvider(context).currentQuestion + 1}/${getTdataProvider(context).questions!.length}',
+                              'Question ${getTDataProvider(context).currentQuestion + 1}/${getTDataProvider(context).questions!.length}',
                               style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
@@ -166,7 +154,9 @@ class _TestPageState extends State<TestPage> {
       bottomNavigationBar: SizedBox(
         height: 60,
         child: InkWell(
-          onTap: () => getTdataProvider(context).nextQuestion(),
+          onTap: () {
+            getTDataProvider(context).saveAnswer(_selectedOption+1);
+            getTDataProvider(context).nextQuestion();},
           child: Container(
             padding: const EdgeInsets.only(bottom: 8),
             decoration: const BoxDecoration(
@@ -196,5 +186,4 @@ class Option {
   Option(this.text);
 }
 
-TestDataProvider getTdataProvider(context) =>
-    Provider.of<TestDataProvider>(context);
+

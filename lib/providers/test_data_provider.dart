@@ -7,6 +7,7 @@ class TestDataProvider extends ChangeNotifier {
   List<Question>? questions;
   int currentQuestion = 0;
   List<int> selection = List.generate(10, (index) => -1,);
+  double get percentageCompleted => currentQuestion/questions!.length > 0 ? currentQuestion/questions!.length : 0.1;
 
   bool get testInitDone => questions != null;
   bool get isLastQuestions => currentQuestion == questions!.length;
