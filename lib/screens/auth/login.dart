@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:jnvst_prep/controllers/firebase_controller.dart';
 import 'package:jnvst_prep/models/user_model.dart';
 import 'package:jnvst_prep/screens/home.dart';
 import 'package:jnvst_prep/utils/tools.dart';
@@ -24,14 +25,22 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Future<void> _manageLogin() async {
-    UserCredential userCredential = await _signInWithGoogle();
-    if (userCredential.user == null) {
-      return;
-    } else {
-      // Save User to State Manager And
-      UserModel user = UserModel.fromFirebaseUser(userCredential.user!);
-      getUserProvider(context).initProvider(user);
-      Navigator.pushNamed(context, HomeScreen.route);
+    try {
+      UserCredential userCredential = await _signInWithGoogle();
+      if (userCredential.user == null) {
+        return;
+      } else {
+        String uid = userCredential.user!.uid;
+        UserModel? userModel = await FirebaseController.getUser(uid);
+        if (userModel == null) {
+          userModel ??= UserModel.fromFirebaseUser(userCredential.user!);
+          FirebaseController.saveUser(userModel);
+        }
+        getUserProvider(context).initProvider(userModel);
+        Navigator.pushNamed(context, HomeScreen.route);
+      }
+    } catch (e) {
+      logError('Error', e.toString());
     }
   }
   @override

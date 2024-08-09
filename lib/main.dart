@@ -2,20 +2,27 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:jnvst_prep/firebase_options.dart';
+import 'package:jnvst_prep/providers/test_data_provider.dart';
 import 'package:jnvst_prep/providers/user_provider.dart';
 import 'package:jnvst_prep/screens/auth/login.dart';
 import 'package:jnvst_prep/screens/home.dart';
 import 'package:jnvst_prep/utils/tools.dart';
 import 'package:provider/provider.dart';
+
 // test page
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(ChangeNotifierProvider(
-    create: (_) => UserProvider(),
-    child: const MyApp(),
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(
+        create: (_) => UserProvider(),
+      ),
+      ChangeNotifierProvider(create: (_) => TestDataProvider())
+    ],
+    child: MyApp(),
   ));
 }
 
@@ -53,13 +60,16 @@ class _MyHomePageState extends State<MyHomePage> {
   void didChangeDependencies() async {
     User? user = FirebaseAuth.instance.currentUser;
     if (user != null) {
-      final myUser = await getUserProvider(context).getUserFromDatabase(user.uid);
+      final myUser =
+          await getUserProvider(context).getUserFromDatabase(user.uid);
       if (myUser != null) {
         Navigator.pushNamed(context, HomeScreen.route);
       }
+    } else {
+
+      await Future.delayed(const Duration(seconds: 1));
+      Navigator.pushNamed(context, LoginScreen.route);
     }
-    await Future.delayed(const Duration(seconds: 1));
-    Navigator.pushNamed(context, LoginScreen.route);
 
     super.didChangeDependencies();
   }

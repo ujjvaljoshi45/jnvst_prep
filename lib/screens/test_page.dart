@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:jnvst_prep/models/question.dart';
 import 'package:jnvst_prep/providers/test_data_provider.dart';
 import 'package:jnvst_prep/utils/tools.dart';
 import 'package:provider/provider.dart';
@@ -21,7 +20,13 @@ class _TestPageState extends State<TestPage> {
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios_new_rounded),
-          onPressed: () => getTDataProvider(context).previousQuestion(),
+          onPressed: () {
+            if (getTDataProvider(context).currentQuestion == 1) {
+              Navigator.pop(context);
+            } else {
+              getTDataProvider(context).previousQuestion();
+            }
+          },
         ),
         backgroundColor: const Color(0XFF374898),
       ),
@@ -34,9 +39,7 @@ class _TestPageState extends State<TestPage> {
               children: [
                 Text(value.currentTestName,
                     style: TextStyle(
-                        fontSize: 28.0,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey[300])),
+                        fontSize: 28.0, fontWeight: FontWeight.bold, color: Colors.grey[300])),
                 const SizedBox(height: 16.0),
                 ClipRRect(
                   borderRadius: BorderRadius.circular(12.0),
@@ -71,12 +74,10 @@ class _TestPageState extends State<TestPage> {
                 Flexible(
                   child: Card(
                     color: Colors.white,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(24)),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
                     child: SizedBox(
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 18.0, vertical: 24.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 24.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisSize: MainAxisSize.min,
@@ -92,15 +93,11 @@ class _TestPageState extends State<TestPage> {
                             Text(
                               value.questions![value.currentQuestion].question,
                               style: const TextStyle(
-                                  fontSize: 22.0,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold),
+                                  fontSize: 22.0, color: Colors.black, fontWeight: FontWeight.bold),
                             ),
                             const SizedBox(height: 16.0),
                             for (int index = 0;
-                                index <
-                                    value.questions![value.currentQuestion]
-                                        .options.length;
+                                index < value.questions![value.currentQuestion].options.length;
                                 index++)
                               GestureDetector(
                                 onTap: () {
@@ -109,33 +106,26 @@ class _TestPageState extends State<TestPage> {
                                   });
                                 },
                                 child: Container(
-                                  margin:
-                                      const EdgeInsets.symmetric(vertical: 4.0),
+                                  margin: const EdgeInsets.symmetric(vertical: 4.0),
                                   decoration: BoxDecoration(
-                                    color: _selectedOption == index
-                                        ? Colors.green[50]
-                                        : Colors.white,
+                                    color:
+                                        _selectedOption == index ? Colors.green[50] : Colors.white,
                                     border: Border.all(
-                                      color: _selectedOption == index
-                                          ? Colors.green
-                                          : Colors.grey,
+                                      color: _selectedOption == index ? Colors.green : Colors.grey,
                                       width: 1.5,
                                     ),
                                     borderRadius: BorderRadius.circular(16.0),
                                   ),
                                   child: ListTile(
                                     title: Text(
-                                      value.questions![value.currentQuestion]
-                                          .options[index],
+                                      value.questions![value.currentQuestion].options[index],
                                       style: TextStyle(
-                                        color: _selectedOption == index
-                                            ? Colors.green
-                                            : Colors.black,
+                                        color:
+                                            _selectedOption == index ? Colors.green : Colors.black,
                                       ),
                                     ),
                                     trailing: _selectedOption == index
-                                        ? const Icon(Icons.check_circle,
-                                            color: Colors.green)
+                                        ? const Icon(Icons.check_circle, color: Colors.green)
                                         : null,
                                   ),
                                 ),
@@ -155,8 +145,9 @@ class _TestPageState extends State<TestPage> {
         height: 60,
         child: InkWell(
           onTap: () {
-            getTDataProvider(context).saveAnswer(_selectedOption+1);
-            getTDataProvider(context).nextQuestion();},
+            getTDataProvider(context).saveAnswer(_selectedOption + 1);
+            getTDataProvider(context).nextQuestion();
+          },
           child: Container(
             padding: const EdgeInsets.only(bottom: 8),
             decoration: const BoxDecoration(
@@ -165,10 +156,7 @@ class _TestPageState extends State<TestPage> {
             child: const Center(
               child: Text(
                 'Next Question',
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold),
+                style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ),
           ),
@@ -185,5 +173,3 @@ class Option {
   final String text;
   Option(this.text);
 }
-
-

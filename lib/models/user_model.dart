@@ -14,7 +14,7 @@ class UserModel {
         displayName: json[displayNameKey],
         email: json[emailKey])
       ..examIds = List.generate(
-        json[examIdsKey].lenght,
+        json[examIdsKey].length,
         (index) => json[examIdsKey][index].toString(),
       );
 
