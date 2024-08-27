@@ -22,7 +22,7 @@ void main() async {
       ),
       ChangeNotifierProvider(create: (_) => TestDataProvider())
     ],
-    child: MyApp(),
+    child: const MyApp(),
   ));
 }
 
@@ -64,9 +64,10 @@ class _MyHomePageState extends State<MyHomePage> {
           await getUserProvider(context).getUserFromDatabase(user.uid);
       if (myUser != null) {
         Navigator.pushNamed(context, HomeScreen.route);
+      } else {
+        Navigator.pushNamed(context, LoginScreen.route);
       }
     } else {
-
       await Future.delayed(const Duration(seconds: 1));
       Navigator.pushNamed(context, LoginScreen.route);
     }

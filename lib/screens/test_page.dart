@@ -11,7 +11,7 @@ class TestPage extends StatefulWidget {
 }
 
 class _TestPageState extends State<TestPage> {
-  int _selectedOption = -1;
+
   @override
   Widget build(BuildContext context) {
     double myWidth = getWidth(context) - 32;
@@ -19,10 +19,16 @@ class _TestPageState extends State<TestPage> {
       backgroundColor: const Color(0XFF374898),
       appBar: AppBar(
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new_rounded),
+          icon: const Icon(Icons.arrow_back_ios_new_rounded,color: Colors.white,),
           onPressed: () {
-            if (getTDataProvider(context).currentQuestion == 1) {
-              Navigator.pop(context);
+            if (getTDataProvider(context).currentQuestion < 1) {
+              showDialog(context: context, builder: (context) => AlertDialog(title: const Text('Alert!'),content: const Text("Are You Sure You Want To Exit?"),actions: [
+                TextButton(onPressed: () {
+                  Navigator.pop(context);
+                  Navigator.pop(context);
+                }, child: const Text('Yes'),),
+                TextButton(onPressed: () => Navigator.pop(context), child: const Text('No'),),
+              ],),);
             } else {
               getTDataProvider(context).previousQuestion();
             }
@@ -32,6 +38,19 @@ class _TestPageState extends State<TestPage> {
       ),
       body: Consumer<TestDataProvider>(
         builder: (context, value, child) {
+          if (value.isDone) {
+            return Center(
+              child: Card(
+                child: AlertDialog(title: Text("Test Completed"),
+                content: Text("Your Score : ${value.calculateScore()}"),
+                  actions: [TextButton(onPressed: () {
+                    value.clear();
+                    Navigator.pop(context);
+                  }, child: Text("Done"))],
+                ),
+              ),
+            );
+          }
           return Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
@@ -102,16 +121,16 @@ class _TestPageState extends State<TestPage> {
                               GestureDetector(
                                 onTap: () {
                                   setState(() {
-                                    _selectedOption = index;
+                                    value.selection[value.currentQuestion] = index;
                                   });
                                 },
                                 child: Container(
                                   margin: const EdgeInsets.symmetric(vertical: 4.0),
                                   decoration: BoxDecoration(
                                     color:
-                                        _selectedOption == index ? Colors.green[50] : Colors.white,
+                                    value.selection[value.currentQuestion]  == index ? Colors.green[50] : Colors.white,
                                     border: Border.all(
-                                      color: _selectedOption == index ? Colors.green : Colors.grey,
+                                      color: value.selection[value.currentQuestion] == index ? Colors.green : Colors.grey,
                                       width: 1.5,
                                     ),
                                     borderRadius: BorderRadius.circular(16.0),
@@ -121,10 +140,10 @@ class _TestPageState extends State<TestPage> {
                                       value.questions![value.currentQuestion].options[index],
                                       style: TextStyle(
                                         color:
-                                            _selectedOption == index ? Colors.green : Colors.black,
+                                        value.selection[value.currentQuestion] == index ? Colors.green : Colors.black,
                                       ),
                                     ),
-                                    trailing: _selectedOption == index
+                                    trailing: value.selection[value.currentQuestion]  == index
                                         ? const Icon(Icons.check_circle, color: Colors.green)
                                         : null,
                                   ),
@@ -145,7 +164,7 @@ class _TestPageState extends State<TestPage> {
         height: 60,
         child: InkWell(
           onTap: () {
-            getTDataProvider(context).saveAnswer(_selectedOption + 1);
+            getTDataProvider(context).saveAnswer(getTDataProvider(context).selection[getTDataProvider(context).currentQuestion]);
             getTDataProvider(context).nextQuestion();
           },
           child: Container(
@@ -154,8 +173,7 @@ class _TestPageState extends State<TestPage> {
               color: Colors.pink,
             ),
             child: const Center(
-              child: Text(
-                'Next Question',
+              child: Text('Next Question',
                 style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ),
@@ -165,9 +183,6 @@ class _TestPageState extends State<TestPage> {
     );
   }
 }
-
-getWidth(context) => MediaQuery.sizeOf(context).width;
-getHeight(context) => MediaQuery.sizeOf(context).height;
 
 class Option {
   final String text;

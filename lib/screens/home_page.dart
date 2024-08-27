@@ -12,7 +12,7 @@ class HomePage extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         ElevatedButton(onPressed: () async {
-          await getTDataProvider(context).initTest('Math Test');
+          await getTDataProvider(context).init('demo',getUserProvider(context).user);
           Navigator.push(context,MaterialPageRoute(builder: (context) => const TestPage()));
     }, child: const Text('Take Test'))
       ],

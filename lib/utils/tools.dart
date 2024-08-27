@@ -12,3 +12,5 @@ UserProvider getUserProvider(context) => Provider.of<UserProvider>(context, list
 SizedBox space(double h) => SizedBox(height: h,);
 TestDataProvider getTDataProvider(context) =>
     Provider.of<TestDataProvider>(context,listen: false);
+SizedBox height10 = const SizedBox(height: 10,);
+SizedBox height20 = const SizedBox(height: 20,);

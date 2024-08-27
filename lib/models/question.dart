@@ -16,7 +16,7 @@ class Question {
   factory Question.fromJson(Map<String, dynamic> json) => Question(
       id: json[idKey],
       question: json[questionKey],
-      options: List.generate(json[optionsKey].length, (index) => json[optionsKey].toString(),),
+      options: List.generate(json[optionsKey].length, (index) => json[optionsKey][index].toString(),),
       correctOption: json[correctOptionKey],
       subject: json[subjectKey])
     ..createdAt = json[createdAtKey].toDate();
@@ -29,6 +29,11 @@ class Question {
     subjectKey: subject,
     createdAtKey: createdAt
   };
+  
+  factory Question.demoQuestion() => Question(id: 'rF0XgKmkWAXnucttCOoC', question: "Consider the following statements regarding Infrastructure Investment Trusts (InvITs). An InviTs, is a pooled investment vehicle like a mutual fund. InviTs are mostly structured as trusts, on behalf of unit-holders. Which of the statements given above is/are correct?"
+  , options: [
+        "1 Only","2 Only","Both 1 and 2","Neither 1 nor 2"
+      ], correctOption: 2, subject: 'demo_test');
 }
 
 String idKey = 'id';
