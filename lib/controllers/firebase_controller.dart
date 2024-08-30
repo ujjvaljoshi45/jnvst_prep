@@ -44,7 +44,7 @@ abstract class FirebaseController {
     List<ExamModel> results = [];
     final response = await users.doc(uid).collection('myTests').get();
     for (int i = 0; i < response.docs.length; i++) {
-      results.add(ExamModel.fromJson(response.docs[i].data() as Map<String, dynamic>));
+      results.add(ExamModel.fromJson(response.docs[i].data()));
       results.last.id = response.docs[i].id;
     }
     return results;

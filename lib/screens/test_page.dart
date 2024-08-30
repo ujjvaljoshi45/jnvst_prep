@@ -41,12 +41,12 @@ class _TestPageState extends State<TestPage> {
           if (value.isDone) {
             return Center(
               child: Card(
-                child: AlertDialog(title: Text("Test Completed"),
+                child: AlertDialog(title: const Text("Test Completed"),
                 content: Text("Your Score : ${value.calculateScore()}"),
                   actions: [TextButton(onPressed: () {
                     value.clear();
                     Navigator.pop(context);
-                  }, child: Text("Done"))],
+                  }, child: const Text("Done"))],
                 ),
               ),
             );
@@ -165,7 +165,7 @@ class _TestPageState extends State<TestPage> {
         child: InkWell(
           onTap: () {
             getTDataProvider(context).saveAnswer(getTDataProvider(context).selection[getTDataProvider(context).currentQuestion]);
-            getTDataProvider(context).nextQuestion();
+            getTDataProvider(context).nextQuestion(context);
           },
           child: Container(
             padding: const EdgeInsets.only(bottom: 8),

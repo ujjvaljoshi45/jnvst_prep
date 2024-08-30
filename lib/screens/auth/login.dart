@@ -37,8 +37,8 @@ class _LoginScreenState extends State<LoginScreen> {
           userModel ??= UserModel.fromFirebaseUser(userCredential.user!);
           FirebaseController.saveUser(userModel);
         }
-        getUserProvider(context).initProvider(userModel);
-        Navigator.pushNamed(context, HomeScreen.route);
+        mounted ? getUserProvider(context).initProvider(userModel) : null;
+        mounted ? Navigator.pushNamed(context, HomeScreen.route) : null;
       }
     } catch (e) {
       logError('Error', e.toString());
@@ -62,35 +62,36 @@ class _LoginScreenState extends State<LoginScreen> {
                   decoration: const BoxDecoration(
                       color: Color.fromRGBO(130, 150, 237, 1),
                       borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(18),
-                        topRight: Radius.circular(18),
+                        topLeft: Radius.circular(22),
+                        topRight: Radius.circular(22),
                       )),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      const SizedBox(height: 20,),
-                      const Text(
-                        'Ace Your Exams with Confidence',
-                        textAlign: TextAlign.center,
-                        softWrap: true,
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 22),
-                      ),
-                      const Text(
-                        'Login to your account and start your journey to success.',
-                        textAlign: TextAlign.center,
-                        softWrap: true,
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 18),
-                      ),
-                      Padding(
-                        padding:  EdgeInsets.symmetric(horizontal: getWidth(context) * 0.2),
-                        child: Row(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric( horizontal: 18.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        const SizedBox(height: 20,),
+                        const Text(
+                          'Ace Your Exams with Confidence',
+                          textAlign: TextAlign.center,
+                          softWrap: true,
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 22),
+                        ),
+                        const Text(
+                          'Login to your account and start your journey to success.',
+                          textAlign: TextAlign.center,
+                          softWrap: true,
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 18),
+                        ),
+                        space(10),
+                        Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
@@ -109,9 +110,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             )
                           ],
                         ),
-                      ),
-                      const SizedBox(height: 20,),
-                    ],
+                        const SizedBox(height: 20,),
+                      ],
+                    ),
                   ),
                 ),
               ),

@@ -1,8 +1,9 @@
-import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:jnvst_prep/controllers/firebase_controller.dart';
 import 'package:jnvst_prep/models/exam_model.dart';
 import 'package:jnvst_prep/models/question.dart';
 import 'package:jnvst_prep/models/user_model.dart';
+import 'package:jnvst_prep/screens/result_page.dart';
 import 'package:jnvst_prep/utils/tools.dart';
 
 class TestDataProvider extends ChangeNotifier {
@@ -58,12 +59,12 @@ class TestDataProvider extends ChangeNotifier {
     selection[currentQuestion] = myAns;
   }
 
-  void nextQuestion() async {
+  void nextQuestion(context) async {
     if (questions != null) {
       if (questions!.length > currentQuestion + 1) {
         currentQuestion++;
       } else {
-        await uploadResult();
+        await uploadResult(context);
       }
     }
     notifyListeners();
@@ -78,12 +79,13 @@ class TestDataProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> uploadResult() async {
+  Future<void> uploadResult(context) async {
     if (!isDone) {
-      ExamModel examModel = ExamModel(id: 'test1', name: 'Test Name', totalScore: 10, myScore: calculateScore(), questions: questions!);
+      ExamModel examModel = ExamModel(id: 'test1', name: 'Test Name', totalScore: questions!.length, myScore: calculateScore(), questions: questions!);
       await FirebaseController.saveTest(userModel!.uid,examModel);
       logEvent('Saved!');
       isDone = true;
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>  ResultPage(exam: ExamModel(id: '-1', name: 'demo', totalScore: 10, myScore: calculateScore(), questions: questions!),)));
     }
     notifyListeners();
 

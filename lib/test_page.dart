@@ -23,21 +23,21 @@ class MathsPracticeTest extends StatefulWidget {
 
 class _MathsPracticeTestState extends State<MathsPracticeTest> {
   int? _selectedOption;
-  final int _correctOption = 3;
+
   final List<Option> options = [
     Option('A. 3600'),
     Option('B. 3604'),
     Option('C. 3606'),
     Option('D. 3600 or 3604'),
   ];
-  double _timeElapsed = 0.1;
+  final double _timeElapsed = 0.1;
   @override
   Widget build(BuildContext context) {
     double myWidth = getWidth(context) - 32;
     return Scaffold(
       backgroundColor: const Color(0XFF374898),
       appBar: AppBar(
-        leading: Icon(Icons.arrow_back_ios_new_rounded),
+        leading: const Icon(Icons.arrow_back_ios_new_rounded),
         backgroundColor: const Color(0XFF374898),
       ),
       body: Padding(

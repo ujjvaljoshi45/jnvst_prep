@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:jnvst_prep/screens/chat_screen.dart';
 import 'package:jnvst_prep/screens/profile_page.dart';
 
 import 'home_page.dart';
@@ -29,22 +31,24 @@ class _HomeScreenState extends State<HomeScreen> {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           centerTitle: false,
-          title: const Text('JNVST PREP'),
+          title: const Text('JNVST Navigator'),
         ),
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: _currentIndex,
           onTap: _managePageChange,
           items: const [
-            BottomNavigationBarItem(icon: Icon(Icons.home_outlined),label: 'Home',activeIcon: Icon(Icons.home)),
-            BottomNavigationBarItem(icon: Icon(Icons.person_outline),label: 'Profile',activeIcon:Icon(Icons.person)),
+            BottomNavigationBarItem(icon: FaIcon(FontAwesomeIcons.house),label: 'Home',),
+            BottomNavigationBarItem(icon: FaIcon(FontAwesomeIcons.message),label: 'Chat',),
+            BottomNavigationBarItem(icon: FaIcon(FontAwesomeIcons.user),label: 'Profile',),
           ],
         ),
         body: PageView(
           physics: const NeverScrollableScrollPhysics(),
           controller: _pageController,
-          children: const [
-            HomePage(),
-            ProfilePage(),
+          children: [
+            HomePage(goToPage: (index) => _managePageChange(index)),
+            const ChatScreen(),
+            const ProfilePage(),
           ],
         ),
       ),
