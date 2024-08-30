@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:jnvst_prep/screens/chat_screen.dart';
-import 'package:jnvst_prep/screens/profile_page.dart';
+import 'package:jnvst_prep/screens/chat/chat_screen.dart';
+import 'package:jnvst_prep/screens/profile/profile_page.dart';
 
-import 'home_page.dart';
+import 'home/home_page.dart';
 
 class HomeScreen extends StatefulWidget {
   static String route = 'home';
@@ -17,12 +17,19 @@ class _HomeScreenState extends State<HomeScreen> {
   final _pageController = PageController();
   int _currentIndex = 0;
   _managePageChange(value) {
-    _currentIndex = value;
-    _pageController.jumpToPage(_currentIndex);
-    setState(() {
-
-    });
+    if (value == -1) {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const ChatScreen(),
+          ));
+    } else {
+      _currentIndex = value;
+      _pageController.jumpToPage(_currentIndex);
+      setState(() {});
+    }
   }
+
   @override
   Widget build(BuildContext context) {
     return PopScope(
@@ -31,15 +38,20 @@ class _HomeScreenState extends State<HomeScreen> {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           centerTitle: false,
-          title: const Text('JNVST Navigator'),
+          title: const Text('My App'),
         ),
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: _currentIndex,
           onTap: _managePageChange,
           items: const [
-            BottomNavigationBarItem(icon: FaIcon(FontAwesomeIcons.house),label: 'Home',),
-            BottomNavigationBarItem(icon: FaIcon(FontAwesomeIcons.message),label: 'Chat',),
-            BottomNavigationBarItem(icon: FaIcon(FontAwesomeIcons.user),label: 'Profile',),
+            BottomNavigationBarItem(
+              icon: FaIcon(FontAwesomeIcons.house),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: FaIcon(FontAwesomeIcons.user),
+              label: 'Profile',
+            ),
           ],
         ),
         body: PageView(
@@ -47,7 +59,6 @@ class _HomeScreenState extends State<HomeScreen> {
           controller: _pageController,
           children: [
             HomePage(goToPage: (index) => _managePageChange(index)),
-            const ChatScreen(),
             const ProfilePage(),
           ],
         ),

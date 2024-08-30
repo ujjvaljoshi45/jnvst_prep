@@ -3,7 +3,7 @@ import 'package:jnvst_prep/controllers/firebase_controller.dart';
 import 'package:jnvst_prep/models/exam_model.dart';
 import 'package:jnvst_prep/models/question.dart';
 import 'package:jnvst_prep/models/user_model.dart';
-import 'package:jnvst_prep/screens/result_page.dart';
+import 'package:jnvst_prep/screens/test/result_page.dart';
 import 'package:jnvst_prep/utils/tools.dart';
 
 class TestDataProvider extends ChangeNotifier {
@@ -16,7 +16,9 @@ class TestDataProvider extends ChangeNotifier {
     10,
     (index) => -1,
   );
-  double get percentageCompleted => currentQuestion/questions!.length > 0 ? currentQuestion/questions!.length : 0.1;
+  double get percentageCompleted => currentQuestion / questions!.length > 0
+      ? currentQuestion / questions!.length
+      : 0.1;
   DateTime startTime = DateTime.now();
 
   bool get testInitDone => questions != null;
@@ -26,7 +28,6 @@ class TestDataProvider extends ChangeNotifier {
     questions = await FirebaseController.getDemoQuestions();
     startTime = DateTime.now();
     currentQuestion = 0;
-
   }
   // Future<void> initTest(String testName) async {
   //   currentTestName = testName;
@@ -81,14 +82,28 @@ class TestDataProvider extends ChangeNotifier {
 
   Future<void> uploadResult(context) async {
     if (!isDone) {
-      ExamModel examModel = ExamModel(id: 'test1', name: 'Test Name', totalScore: questions!.length, myScore: calculateScore(), questions: questions!);
-      await FirebaseController.saveTest(userModel!.uid,examModel);
+      ExamModel examModel = ExamModel(
+          id: 'test1',
+          name: 'Test Name',
+          totalScore: questions!.length,
+          myScore: calculateScore(),
+          questions: questions!);
+      await FirebaseController.saveTest(userModel!.uid, examModel);
       logEvent('Saved!');
       isDone = true;
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>  ResultPage(exam: ExamModel(id: '-1', name: 'demo', totalScore: 10, myScore: calculateScore(), questions: questions!),)));
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (context) => ResultPage(
+                    exam: ExamModel(
+                        id: '-1',
+                        name: 'demo',
+                        totalScore: 10,
+                        myScore: calculateScore(),
+                        questions: questions!),
+                  )));
     }
     notifyListeners();
-
   }
 
   int calculateScore() {
@@ -107,7 +122,7 @@ class TestDataProvider extends ChangeNotifier {
     currentQuestion = 0;
     selection = List.generate(
       10,
-          (index) => -1,
+      (index) => -1,
     );
   }
 }
