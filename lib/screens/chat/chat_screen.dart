@@ -43,6 +43,7 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
         appBar: AppBar(
           leading: IconButton(
               onPressed: () => Navigator.pop(context),
@@ -59,7 +60,7 @@ class _ChatScreenState extends State<ChatScreen> {
           ],
         ),
         body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 2),
+          padding:  const EdgeInsets.symmetric(horizontal: 16.0,vertical:  2.0),
           child: SizedBox(
             height: getHeight(context) -
                 kBottomNavigationBarHeight -
@@ -78,15 +79,17 @@ class _ChatScreenState extends State<ChatScreen> {
                       child: Lottie.asset(
                         'assets/generating.json',
                       )),
+                TextInputField(
+                  controller: _controller,
+                  focusNode: _focusNode,
+                  sendMessage: _sendMessage,
+                ),
+                space(20)
               ],
             ),
           ),
         ),
-        bottomNavigationBar: TextInputField(
-          controller: _controller,
-          focusNode: _focusNode,
-          sendMessage: _sendMessage,
-        ));
+        );
   }
 
   _buildMessageList() => ListView.builder(

@@ -1,8 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:jnvst_prep/controllers/firebase_controller.dart';
 import 'package:jnvst_prep/models/exam_model.dart';
 import 'package:jnvst_prep/models/user_model.dart';
+import 'package:jnvst_prep/screens/auth/login.dart';
 import 'package:jnvst_prep/utils/tools.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -63,7 +65,7 @@ class _ProfilePageState extends State<ProfilePage> {
               children: [
                 Expanded(
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: _manageSignOut,
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16)),
@@ -85,6 +87,10 @@ class _ProfilePageState extends State<ProfilePage> {
         ],
       ),
     );
+  }
+  _manageSignOut() async {
+    await FirebaseAuth.instance.signOut();
+    mounted? Navigator.pushReplacementNamed(context, LoginScreen.route,) : null;
   }
 }
 

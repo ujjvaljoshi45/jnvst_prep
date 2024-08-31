@@ -68,17 +68,17 @@ class _MyHomePageState extends State<MyHomePage> {
       final myUser = await getUserProvider(context).getUserFromDatabase(user!.uid);
       if (myUser == null) {
         await Future.delayed(const Duration(seconds: 1));
-        mounted ? Navigator.pushNamed(context, LoginScreen.route) : debugPrint('not mounted');
+        mounted ? Navigator.pushReplacementNamed(context, LoginScreen.route) : debugPrint('not mounted');
       }
       else {
         await Future.delayed(const Duration(seconds: 1));
         mounted
-            ? Navigator.pushNamed(context, HomeScreen.route)
+            ? Navigator.pushReplacementNamed(context, HomeScreen.route)
             : debugPrint('not mounted');
       }
     } catch (e) {
       await Future.delayed(const Duration(seconds: 1));
-      mounted ? Navigator.pushNamed(context, LoginScreen.route) : debugPrint('not mounted');
+      mounted ? Navigator.pushReplacementNamed(context, LoginScreen.route) : debugPrint('not mounted');
     }
     super.didChangeDependencies();
   }

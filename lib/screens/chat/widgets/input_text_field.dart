@@ -15,39 +15,36 @@ class TextInputField extends StatelessWidget {
   final Function() sendMessage;
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 18.0),
-      child: Card(
-        color: levender,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(24.r),
-        ),
-        child: Row(
-          children: [
-            Flexible(
-              child: Padding(
-                padding: const EdgeInsets.only(left: 10.0),
-                child: TextField(
-                  controller: controller,
-                  style: hintTextStyle.copyWith(fontWeight: FontWeight.w600),
-                  cursorColor: Colors.deepPurple,
-                  focusNode: focusNode,
-                  decoration: InputDecoration(
-                      hintStyle: hintTextStyle,
-                      border: InputBorder.none,
-                      hintText: 'type something...'),
-                ),
+    return Card(
+      color: levender,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(24.r),
+      ),
+      child: Row(
+        children: [
+          Flexible(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 10.0),
+              child: TextField(
+                controller: controller,
+                style: hintTextStyle.copyWith(fontWeight: FontWeight.w600),
+                cursorColor: Colors.deepPurple,
+                focusNode: focusNode,
+                decoration: InputDecoration(
+                    hintStyle: hintTextStyle,
+                    border: InputBorder.none,
+                    hintText: 'type something...'),
               ),
             ),
-            IconButton(
-                onPressed: sendMessage,
-                icon: FaIcon(
-                  FontAwesomeIcons.arrowRight,
-                  color: Colors.white,
-                  size: 16.sp,
-                ))
-          ],
-        ),
+          ),
+          IconButton(
+              onPressed: sendMessage,
+              icon: FaIcon(
+                FontAwesomeIcons.arrowRight,
+                color: Colors.white,
+                size: 16.sp,
+              ))
+        ],
       ),
     );
   }

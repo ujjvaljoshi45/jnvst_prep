@@ -53,20 +53,19 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Column(
             children: [
               SizedBox(
-                  height: getHeight(context) * 0.7,
+                  height: getHeight(context) * 0.65,
                   width: getWidth(context),
                   child: Lottie.asset('assets/login_lottie.json')),
               Flexible(
                 child: Container(
-                  height: getHeight(context) * 0.3 + 40,
                   decoration: const BoxDecoration(
                       color: Color.fromRGBO(130, 150, 237, 1),
                       borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(22),
-                        topRight: Radius.circular(22),
+                        topLeft: Radius.circular(24),
+                        topRight: Radius.circular(24),
                       )),
                   child: Padding(
-                    padding: const EdgeInsets.symmetric( horizontal: 18.0),
+                    padding: const EdgeInsets.symmetric( horizontal: 32.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
