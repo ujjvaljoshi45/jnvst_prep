@@ -38,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           centerTitle: false,
-          title: const Text('My App'),
+          title: const Text('JNVST Navigator'),
         ),
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: _currentIndex,

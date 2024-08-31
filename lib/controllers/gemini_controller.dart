@@ -1,7 +1,7 @@
 import 'package:google_generative_ai/google_generative_ai.dart';
 
 class GeminiController {
-  String apiKey = "";
+  final String apiKey = "AIzaSyAj_Sgx2x8DZ8vFEjprAVzhF8TbWZBZM8I";
   late GenerativeModel gemini;
   late ChatSession session;
   GeminiController._internal();

@@ -91,7 +91,13 @@ class _HomePageState extends State<HomePage> {
           child: Padding(
             padding: const EdgeInsets.all(12.0),
             child: ListTile(
-              onTap: () => widget.goToPage(content['id']),
+              onTap: () {
+                if (content['id'] == 0) {
+                  _startTest(context);
+                } else {
+                  widget.goToPage(content['id']);
+                }
+              },
               title: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,

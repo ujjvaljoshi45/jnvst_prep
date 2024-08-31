@@ -114,8 +114,17 @@ class _ChatScreenState extends State<ChatScreen> {
         ],
       );
 
-  _handelFaq(String text) {
-    setState(() => _messages.add(Message(sender: 'user', text: text)));
+  _handelFaq(String text) async {
+    _messages.add(Message(sender: 'user', text: text));
+    _controller.clear();
+    _focusNode.unfocus();
+    setState(() => isLoading = true);
+    String response = await geminiController.promptAi(_messages.last.text);
+    _messages.add(Message(
+      text: response,
+      sender: 'bot',
+    ));
+    setState(() => isLoading = false);
   }
 
   _sendMessage() async {
